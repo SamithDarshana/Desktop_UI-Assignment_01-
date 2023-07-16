@@ -1,0 +1,236 @@
+﻿<Window x:Class="Desktop_UI.Views.AddStudentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Desktop_UI.Views"
+        mc:Ignorable="d" 
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        WindowStartupLocation="CenterScreen"
+        xmlns:viewmodel="clr-namespace:Desktop_UI.ViewModels"
+        WindowStyle="None" Height="600" Width="500" Background="Transparent"
+        Title="AddStudentWindow" >
+    <Window.DataContext>
+        <viewmodel:AddStudentWindowVM/>
+    </Window.DataContext>
+
+    <Border Background="#9FAFC9" CornerRadius="12">
+        <Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Border VerticalAlignment="Center" 
+                            HorizontalAlignment="Center"
+                            Background="#5B618B" CornerRadius="3">
+                        <TextBlock FontSize="18"
+                                   FontWeight="Bold"
+                                   Foreground="White"
+                                   Width="140"
+                                   TextAlignment="Center"
+                                   Text="ADD STUDENT"/>
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock FontSize="18"
+                               VerticalAlignment="Center"
+                               Margin="25 0 0 0"
+                               Text="First Name"
+                               Grid.Row="0" 
+                               Grid.Column="0"
+                               Background="#5B4F7B"
+                               Foreground="White"
+                               Width="120"
+                               TextAlignment="Center"/>
+                    <TextBox Text="{Binding FirstName}"
+                               Margin="10 0 20 0"
+                               VerticalAlignment="Center"
+                               Padding="2"
+                               FontSize="16"
+                               Grid.Row="0" 
+                               Grid.Column="1"/>
+
+                    <TextBlock FontSize="18"
+                               VerticalAlignment="Center"
+                               Margin="25 0 0 0"
+                               Text="Last Name"
+                               Grid.Row="1" 
+                               Grid.Column="0"
+                               Background="#5B4F7B"
+                               Foreground="White"
+                               Width="120"
+                               TextAlignment="Center"/>
+                    <TextBox Text="{Binding LastName}"
+                               Margin="10 0 20 0"
+                               VerticalAlignment="Center"
+                               Padding="2"
+                               FontSize="16"
+                               Grid.Row="1" 
+                               Grid.Column="1"/>
+
+                    <StackPanel VerticalAlignment="Center"
+                                Grid.Row="2" 
+                                Grid.Column="0">
+                        <TextBlock FontSize="18"
+                                   VerticalAlignment="Center"
+                                   Margin="25 0 0 0"
+                                   Text="Date of Birth"
+                                   Background="#5B4F7B"
+                                   Foreground="White"
+                                   Width="120"
+                                   TextAlignment="Center"/>
+                        <TextBlock HorizontalAlignment="Center"
+                                   Text="(mm/dd/yyyy)"/>
+                    </StackPanel>
+
+                    <DatePicker SelectedDateFormat="Short"
+                                Text="{Binding DateOfBirth, Mode=TwoWay}"
+                                SelectedDate="{x:Static sys:DateTime.Now}"
+                                Margin="10 0 20 0"
+                                VerticalAlignment="Center"
+                                Padding="2"
+                                FontSize="16"
+                                Grid.Row="2" 
+                                Grid.Column="1" DisplayDateStart="1950-01-01">
+
+                    </DatePicker>
+
+                    <TextBlock Grid.Row="3"
+                               Grid.Column="0"
+                               Text="Upload photo"
+                               FontSize="18"
+                               Margin=" 20 0 0 0"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Background="#5B4F7B"
+                               Foreground="White"
+                               Width="120"
+                               TextAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" 
+                                VerticalAlignment="Center" 
+                                Grid.Row="3" Grid.Column="1">
+                        <Button Command="{Binding UploadPhotoCommand}"
+                                HorizontalAlignment="Left" 
+                                Height="22"
+                                Width="50"
+                                Content="Upload"
+                                Margin="10 0 20 0"
+                                VerticalAlignment="Center"
+                                Padding="2"
+                                FontSize="12"/>
+                        <Image Height="60"
+                               Width="60"
+                               Source="{Binding Image}"/>
+                    </StackPanel>
+                    <TextBlock FontSize="18"
+                               VerticalAlignment="Center"
+                               Margin="25 0 0 0"
+                               Text="GPA"
+                               Grid.Row="4" 
+                               Grid.Column="0"
+                               Background="#5B4F7B"
+                               Foreground="White"
+                               Width="120"
+                               TextAlignment="Center"/>
+                    <TextBox Text="{Binding GPA}"
+                             Margin="10 0 20 0"
+                             VerticalAlignment="Center"
+                             Padding="2"
+                             FontSize="16"
+                             Grid.Row="4" 
+                             Grid.Column="1"/>
+                </Grid>
+
+                <Grid Grid.Row="2" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Command="{Binding SaveCommand}" 
+                                FontWeight="Bold"
+                                FontSize="18"
+                                Height="40"
+                                Width="90"
+                                Content="SAVE">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="LightGray"/>
+                                    <Setter Property="Foreground" Value="#463b68"/>
+                                    <Setter Property="BorderBrush" Value="#463b68"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#463b68"/>
+                                            <Setter Property="Foreground" Value="LightGray"/>
+                                            <Setter Property="BorderBrush" Value="LightGray"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="90"
+                                        Height="30"
+                                        CornerRadius="9"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="2"
+                                        Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        <Button Command="{Binding CancelCommand}"
+                                Margin="20"
+                                FontWeight="Bold"
+                                FontSize="18"
+                                Height="40"
+                                Width="100"
+                                Content="CANCEL">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="LightGray"/>
+                                    <Setter Property="Foreground" Value="#463b68"/>
+                                    <Setter Property="BorderBrush" Value="#463b68"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#463b68"/>
+                                            <Setter Property="Foreground" Value="LightGray"/>
+                                            <Setter Property="BorderBrush" Value="LightGray"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="90"
+                                        Height="30"
+                                        CornerRadius="9"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="2"
+                                        Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
